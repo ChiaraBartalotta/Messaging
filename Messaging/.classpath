@@ -7,8 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="/home/davide/temp/homework_asw/asw-hw3-messaging-hw/jar/asw-hw3a-ProduttoreOrdini.jar"/>
-	<classpathentry kind="lib" path="/home/davide/temp/homework_asw/asw-hw3-messaging-hw/jar/asw-hw3e-ConsumatoreOrdini.jar"/>
 	<classpathentry kind="lib" path="/home/davide/temp/homework_asw/asw-hw3-messaging-hw/jar/asw-hw3z-Common.jar"/>
 	<classpathentry kind="lib" path="/home/davide/temp/homework_asw/asw-hw3-messaging-hw/jar/asw-util.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
