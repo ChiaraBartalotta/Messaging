@@ -1,0 +1,61 @@
+!SESSION 2014-12-28 10:58:51.597 -----------------------------------------------
+eclipse.buildId=4.4.1.M20140925-0400
+java.version=1.7.0_65
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=it_IT
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.jpt.dbws.eclipselink.ui 4 0 2014-12-28 10:58:54.930
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.jpt.dbws.eclipselink.ui [391]
+  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.jpt.dbws.eclipselink.ui [osgi.identity; osgi.identity="org.eclipse.jpt.dbws.eclipselink.ui"; type="osgi.bundle"; version:Version="1.1.100.v201308271450"; singleton:="true"] because it is exposed to package 'javax.xml.bind' from resources org.eclipse.osgi [osgi.identity; osgi.identity="org.eclipse.osgi"; type="osgi.bundle"; version:Version="3.10.1.v20140909-1633"; singleton:="true"] and javax.xml.bind [osgi.identity; osgi.identity="javax.xml.bind"; type="osgi.bundle"; version:Version="2.1.9.v201005080401"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.jpt.dbws.eclipselink.ui [osgi.identity; osgi.identity="org.eclipse.jpt.dbws.eclipselink.ui"; type="osgi.bundle"; version:Version="1.1.100.v201308271450"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=org.eclipse.wst.common.project.facet.ui)(&(bundle-version>=1.3.0)(!(bundle-version>=2.0.0))))
+     |
+    provide: osgi.wiring.bundle: org.eclipse.wst.common.project.facet.ui
+  org.eclipse.osgi [osgi.identity; osgi.identity="org.eclipse.osgi"; type="osgi.bundle"; version:Version="3.10.1.v20140909-1633"; singleton:="true"]
+
+Chain 2:
+  org.eclipse.jpt.dbws.eclipselink.ui [osgi.identity; osgi.identity="org.eclipse.jpt.dbws.eclipselink.ui"; type="osgi.bundle"; version:Version="1.1.100.v201308271450"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=org.eclipse.persistence.dbws.builder)(&(bundle-version>=2.3.0)(!(bundle-version>=3.0.0))))
+     |
+    provide: osgi.wiring.bundle; osgi.wiring.bundle="org.eclipse.persistence.dbws.builder"; bundle-version:Version="2.6.0.v20140809-296a69f"
+  org.eclipse.persistence.dbws.builder [osgi.identity; osgi.identity="org.eclipse.persistence.dbws.builder"; type="osgi.bundle"; version:Version="2.6.0.v20140809-296a69f"]
+    import: (osgi.wiring.package=javax.xml.bind)
+     |
+    export: osgi.wiring.package: javax.xml.bind
+  javax.xml.bind [osgi.identity; osgi.identity="javax.xml.bind"; type="osgi.bundle"; version:Version="2.1.9.v201005080401"]
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.m2e.logback.configuration 2 0 2014-12-28 10:59:06.648
+!MESSAGE Exception while setting up logging:org.eclipse.osgi.internal.framework.EquinoxConfiguration$1 cannot be cast to java.lang.String
+!STACK 0
+java.lang.ClassCastException: org.eclipse.osgi.internal.framework.EquinoxConfiguration$1 cannot be cast to java.lang.String
+	at org.eclipse.m2e.logback.configuration.LogHelper.logJavaProperties(LogHelper.java:26)
+	at org.eclipse.m2e.logback.configuration.LogPlugin.loadConfiguration(LogPlugin.java:189)
+	at org.eclipse.m2e.logback.configuration.LogPlugin.configureLogback(LogPlugin.java:144)
+	at org.eclipse.m2e.logback.configuration.LogPlugin.access$2(LogPlugin.java:107)
+	at org.eclipse.m2e.logback.configuration.LogPlugin$1.run(LogPlugin.java:62)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+
+!ENTRY org.eclipse.ui 4 4 2014-12-28 11:01:14.450
+!MESSAGE Plug-in 'org.eclipse.m2e.core.ui' contributed an invalid Menu Extension (Path: 'org.eclipse.ui.projectConfigure' is invalid): org.eclipse.m2e.enableNatureAction
+
+!ENTRY org.eclipse.ui 4 4 2014-12-28 11:01:14.456
+!MESSAGE Plug-in 'org.eclipse.pde.ui' contributed an invalid Menu Extension (Path: 'org.eclipse.ui.projectConfigure' is invalid): org.eclipse.pde.ui.ConvertedProjectWizard
+
+!ENTRY org.eclipse.ui 4 4 2014-12-28 11:01:14.456
+!MESSAGE Plug-in 'org.eclipse.wst.jsdt.ui' contributed an invalid Menu Extension (Path: 'org.eclipse.ui.projectConfigure' is invalid): org.eclipse.wst.jsdt.internal.web.ui.convertProjects
