@@ -11,7 +11,16 @@ public class DataEnricher {
 		this.idOrder = 0;
 	}
 	
-	public void assignIdOrder(String order) {
+	public String assignIdOrder(String order) {
+		if (order!=null && !order.equals("")) {
+			this.idOrder += 1;
+			return this.idOrder+" "+order;
+		} else
+			return null;
+	}
+	
+	public void receiveMessageByQueue() {
+		//this.codaOrdiniSenzaId.
 		
 	}
 	 
