@@ -2,9 +2,7 @@ package asw.hw3.consumatoreordini;
 
 import java.util.logging.Logger;
 
-import javax.jms.ConnectionFactory;
-import javax.jms.MessageListener;
-import javax.jms.Queue;
+import javax.jms.*;
 
 
 import asw.jms.simpleasynchconsumer.SimpleAsynchConsumer;

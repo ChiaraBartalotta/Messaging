@@ -22,10 +22,10 @@ public class DataEnricherMessageProcessor implements MessageListener {
 		this.idOrder = 0;
 	}*/
 	
-	public DataEnricherMessageProcessor(Queue coDest, ConnectionFactory cn) {
+	public DataEnricherMessageProcessor(Queue codaOrdiniConId, ConnectionFactory connectionFactory) {
 		this.idOrder = 0;
-		this.codaOrdiniConId = coDest;
-		this.connectionFactory = cn;
+		this.codaOrdiniConId = codaOrdiniConId;
+		this.connectionFactory = connectionFactory;
 	}
 	
 	public String assignIdOrder(String order) {
@@ -42,10 +42,7 @@ public class DataEnricherMessageProcessor implements MessageListener {
 		if (message instanceof TextMessage) {
     		TextMessage  messageText = (TextMessage) message;
     		try {
-    			/* gestisce la ricezione del messaggio message */
     			String text = messageText.getText();
-    	    	/* delega la vera gestione del messaggio 
-    	    	 * al metodo processMessage */
     			processReceiveMessageByQueue(text);
     		} catch (JMSException e) {
     			logger.info("MessageListener.onMessage(): JMSException: " + e.toString());

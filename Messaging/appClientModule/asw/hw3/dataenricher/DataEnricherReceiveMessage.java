@@ -4,10 +4,8 @@ import java.util.logging.Logger;
 
 import javax.jms.*;
 
-import asw.hw3.consumatoreordini.ConsumatoreOrdiniMessageProcessor;
 import asw.jms.simpleasynchconsumer.SimpleAsynchConsumer;
 import asw.jms.simpleasynchconsumer.SimpleAsynchConsumerThread;
-import asw.util.cancellable.KeyboardKiller;
 import asw.util.logging.AswLogger;
 
 public class DataEnricherReceiveMessage {
@@ -18,13 +16,13 @@ public class DataEnricherReceiveMessage {
     private SimpleAsynchConsumer c = null; 
 	private static Logger logger = AswLogger.getInstance().getLogger("asw.hw3.dataenricher"); 
     
-    public DataEnricherReceiveMessage(Queue codSenzaId, ConnectionFactory con, Queue codConId) {
-    	this.codaOrdiniSenzaId = codSenzaId;
-    	this.codaOrdiniConId = codConId;
-    	this.connectionFactory = con;
+    public DataEnricherReceiveMessage(Queue codaSenzaId, ConnectionFactory connectionFactory, Queue codaConId) {
+    	this.codaOrdiniSenzaId = codaSenzaId;
+    	this.codaOrdiniConId = codaConId;
+    	this.connectionFactory = connectionFactory;
     }
     
-public void run() {
+    public void run() {
 		MessageListener listener = new DataEnricherMessageProcessor(this.codaOrdiniConId, this.connectionFactory);
 		
     	c = new SimpleAsynchConsumer("Consumatori ricezione ordini senza Id", this.codaOrdiniSenzaId, connectionFactory, listener);
