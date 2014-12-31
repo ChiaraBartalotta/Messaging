@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 /** 
  * Un oggetto RigaOrdine rappresenta una riga di un ordine effettuato da un cliente,  
- * ed è relativa ad un certo prodotto. 
+ * ed ï¿½ relativa ad un certo prodotto. 
  * 
  * Si noti che si tratta di una rappresentazione AUTOCONTENUTA: 
  * un singolo oggetto RigaOrdine rappresenta una intera riga d'ordine, senza 
- * referenziare né oggetti Cliente (non ci sono) né oggetti Prodotto (non ci sono). 
+ * referenziare nï¿½ oggetti Cliente (non ci sono) nï¿½ oggetti Prodotto (non ci sono). 
  */
 public class RigaOrdine {
 
@@ -28,6 +28,26 @@ public class RigaOrdine {
 		this.prodotto = prodotto; 
 	}
 	
+	public int getNumeroRiga() {
+		return numeroRiga;
+	}
+
+	public void setNumeroRiga(int numeroRiga) {
+		this.numeroRiga = numeroRiga;
+	}
+
+	public void setIdOrdine(int idOrdine) {
+		this.idOrdine = idOrdine;
+	}
+
+
+
+	public void setProdotto(String prodotto) {
+		this.prodotto = prodotto;
+	}
+
+
+
 	/** Restituisce una descrizione testuale di questa riga d'ordine, nella forma: 
 	 * <id ordine> <numero riga> <prodotto> */
 	public String toString() {

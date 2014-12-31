@@ -8,14 +8,14 @@ import java.util.*;
  * 
  * Si noti che si tratta di una rappresentazione AUTOCONTENUTA: 
  * un singolo oggetto Ordine rappresenta un ordine intero, senza 
- * referenziare né oggetti Cliente (non ci sono) né oggetti Prodotto (non ci sono) 
- * né oggetti RigaOrdine (rappresentano un'altra cosa). 
+ * referenziare nï¿½ oggetti Cliente (non ci sono) nï¿½ oggetti Prodotto (non ci sono) 
+ * nï¿½ oggetti RigaOrdine (rappresentano un'altra cosa). 
  */
 public class Ordine {
 	
 	/** 
 	 * Il numero identificativo dell'ordine. 
-	 * Se vale 0 vuol dire che non è stato assegnato nessun identificatore all'ordine. 
+	 * Se vale 0 vuol dire che non ï¿½ stato assegnato nessun identificatore all'ordine. 
 	 */
 	private int idOrdine; 
 	
@@ -35,6 +35,27 @@ public class Ordine {
 	/** Crea un nuovo ordine, con identificatore non assegnato. */ 
 	public Ordine(String cliente, List<String> prodotti) {
 		this(0, cliente, prodotti); 
+	}
+	
+	
+	public String getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
+	}
+
+	public List<String> getProdotti() {
+		return prodotti;
+	}
+
+	public void setProdotti(List<String> prodotti) {
+		this.prodotti = prodotti;
+	}
+
+	public int getIdOrdine() {
+		return idOrdine;
 	}
 
 	/** 

@@ -16,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
     	DataEnricherReceiveMessage dataEnricher = new DataEnricherReceiveMessage(codaOrdiniSenzaId, connectionFactory, codaOrdiniConId);
-    	dataEnricher.run();  
+    	dataEnricher.run();   	
     }
 
 }

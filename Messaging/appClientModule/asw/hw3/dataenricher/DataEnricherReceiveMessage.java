@@ -23,7 +23,7 @@ public class DataEnricherReceiveMessage {
     }
     
     public void run() {
-		MessageListener listener = new DataEnricherMessageProcessor(this.codaOrdiniConId, this.connectionFactory);
+		MessageListener listener = new DataEnricherProcessorMessage(this.codaOrdiniConId, this.connectionFactory);
 		
     	c = new SimpleAsynchConsumer("Consumatori ricezione ordini senza Id", this.codaOrdiniSenzaId, connectionFactory, listener);
         logger.info("Creato consumatore ricezione ordini senza Id: " + c.toString());

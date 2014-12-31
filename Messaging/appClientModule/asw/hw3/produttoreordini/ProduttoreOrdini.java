@@ -1,17 +1,14 @@
 package asw.hw3.produttoreordini;
 
-import java.io.IOException;
 import java.util.logging.Logger;
 
 import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
 
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
 
 import asw.hw3.dominio.GeneratoreOrdini;
 import asw.hw3.dominio.Ordine;
+import asw.hw3.dominio.SerializeDeserializeJSON;
 import asw.jms.simpleproducer.SimpleProducer;
 import asw.util.logging.AswLogger;
 
@@ -62,7 +59,9 @@ public class ProduttoreOrdini {
 			Ordine o = g.getRandomOrdine();
 			String jsonOrder = "";
 			logger.info("Creo ordine (senza id): " + o.toString());
-			ObjectMapper mapper = new ObjectMapper();
+			SerializeDeserializeJSON serializeDeserializeJSON = new SerializeDeserializeJSON();
+			jsonOrder = serializeDeserializeJSON.serializeObject(o);
+			/*ObjectMapper mapper = new ObjectMapper();
 			try {
 				jsonOrder = mapper.writeValueAsString(o);
 			} catch (JsonGenerationException e) {
@@ -74,7 +73,7 @@ public class ProduttoreOrdini {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			p.sendMessage(jsonOrder); 
 		}
 		

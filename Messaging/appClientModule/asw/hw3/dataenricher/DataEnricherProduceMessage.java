@@ -5,8 +5,6 @@ import java.util.logging.Logger;
 import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
 
-import asw.hw3.dominio.GeneratoreOrdini;
-import asw.hw3.dominio.Ordine;
 import asw.jms.simpleproducer.SimpleProducer;
 import asw.util.logging.AswLogger;
 
@@ -26,15 +24,12 @@ public class DataEnricherProduceMessage {
 
 	public void run() {
 
-		/* crea un produttore su codaOrdiniSenzaId */ 
 		SimpleProducer p = new SimpleProducer("Produttore ordini con id", codaOrdiniConId, connectionFactory);
 		logger.info("Creato produttore con Id: " + p.toString());
-		/* avvia il produttore */ 
 		p.connect(); 
 		p.sendMessage(this.messageText); 
 		/* disconnette il produttore */ 
 		p.disconnect(); 
-		/* termina */ 
 		System.exit(0); 
 	}
 }
