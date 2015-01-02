@@ -48,13 +48,39 @@ public class AggregatorProcessorMessage implements MessageListener {
 	private void processReceiveMessageByQueue(String mex) {
 		SerializeDeserializeJSON serializeDeserializeJSON = new SerializeDeserializeJSON();
 		IntestazioneOrdine intOrdine = (IntestazioneOrdine) serializeDeserializeJSON.deserializeObject(mex, IntestazioneOrdine.class);
-		if (intOrdine.getIdOrdine()>0 && intOrdine.getCliente()!=null && intOrdine.getNumeroRigheOrdine()>0) 
+		if (intOrdine.getIdOrdine()>0 && intOrdine.getCliente()!=null && !intOrdine.getCliente().equals("") && intOrdine.getNumeroRigheOrdine()>0) 
 			processHeaderOrder(intOrdine);
+		else {
+			RigaOrdine riga = (RigaOrdine) serializeDeserializeJSON.deserializeObject(mex, RigaOrdine.class);
+			processRowOrder(riga);
+		}
 	}
 	
 	private void processHeaderOrder(IntestazioneOrdine intOrdine) {
-		
+		List<RigaOrdine> righeOrdine = new ArrayList<RigaOrdine>();
+		for(RigaOrdine r : this.righeOrdineInAttesa) {
+			if (r.getIdOrdine()==intOrdine.getIdOrdine()) {
+				righeOrdine.add(r);
+				//this.righeOrdineInAttesa.remove(r);
+			}
+		}
+		this.ordiniRiaggregati.put(intOrdine, righeOrdine);
 	}
 	
-
+	private void processRowOrder(RigaOrdine riga) {
+		IntestazioneOrdine intOrder = getHeaderByIdOrder(riga.getIdOrdine());
+		if (intOrder==null) 
+			this.righeOrdineInAttesa.add(riga);
+		else {
+		
+		}
+	}
+	
+	private IntestazioneOrdine getHeaderByIdOrder(int idOrder) {
+		for(IntestazioneOrdine i : this.ordiniRiaggregati.keySet()) {
+			if (i.getIdOrdine()==idOrder)
+				return i;
+		}
+		return null;
+	}
 }
