@@ -47,18 +47,18 @@ public class SplitterProcessorMessage implements MessageListener {
 	private void processReceiveMessageByQueue(String messageOrderWithId) {
 		SerializeDeserializeJSON serializeDeserializeJSON = new SerializeDeserializeJSON();
 		Ordine ordine = (Ordine) serializeDeserializeJSON.deserializeObject(messageOrderWithId, Ordine.class);
-		manageHeaderOrders(messageOrderWithId, ordine, serializeDeserializeJSON );
-		manageRowOrders(messageOrderWithId, ordine, serializeDeserializeJSON );
+		manageHeaderOrders(ordine, serializeDeserializeJSON );
+		manageRowOrders(ordine, serializeDeserializeJSON );
 	}
 	
-	private void manageHeaderOrders(String messageOrderWithId, Ordine ordine, SerializeDeserializeJSON  serializeDeserializeJSON) {
+	private void manageHeaderOrders(Ordine ordine, SerializeDeserializeJSON  serializeDeserializeJSON) {
 		IntestazioneOrdine intOrder = new IntestazioneOrdine(ordine.getIdOrdine(), ordine.getCliente(), ordine.getProdotti().size());
 		String intOrderJson = serializeDeserializeJSON.serializeObject(intOrder);
 		SplitterHeaderOrdersProduceMessage splitterHeader = new SplitterHeaderOrdersProduceMessage(this.codaIntestazioniOrdine, this.connectionFactory, intOrderJson);
 		splitterHeader.run();
 	}
 	
-	private void manageRowOrders(String messageOrderWithId, Ordine ordine, SerializeDeserializeJSON  serializeDeserializeJSON) {
+	private void manageRowOrders(Ordine ordine, SerializeDeserializeJSON  serializeDeserializeJSON) {
 		List<String> prodotti = ordine.getProdotti();
 		for(int i=0; i<prodotti.size(); i++) {
 			RigaOrdine row = new RigaOrdine(ordine.getIdOrdine(), i, prodotti.get(i));
