@@ -20,7 +20,7 @@ public class AggregatorProcessorMessage implements MessageListener {
 	
 	private ConnectionFactory connectionFactory;
 	private Queue codaOrdiniRiaggregati;
-	private static Logger logger = AswLogger.getInstance().getLogger("asw.hw3.splitter");
+	private static Logger logger = AswLogger.getInstance().getLogger("asw.hw3.aggregator");
 	private Map<IntestazioneOrdine, List<RigaOrdine>> ordiniRiaggregati;
 	private List<RigaOrdine> righeOrdineInAttesa;
 	
@@ -68,19 +68,36 @@ public class AggregatorProcessorMessage implements MessageListener {
 	}
 	
 	private void processRowOrder(RigaOrdine riga) {
-		IntestazioneOrdine intOrder = getHeaderByIdOrder(riga.getIdOrdine());
-		if (intOrder==null) 
+		IntestazioneOrdine intOrdine = getHeaderByIdOrder(riga.getIdOrdine());
+		if (intOrdine==null) 
 			this.righeOrdineInAttesa.add(riga);
 		else {
-		
+			List<RigaOrdine> righe = this.ordiniRiaggregati.get(intOrdine);
+			righe.add(riga);
+			if (righe.size()==intOrdine.getNumeroRigheOrdine()) 
+				sendMessageOrder(intOrdine, righe);
+			else {
+				this.ordiniRiaggregati.put(intOrdine, righe);
+			}
 		}
 	}
 	
-	private IntestazioneOrdine getHeaderByIdOrder(int idOrder) {
+	private IntestazioneOrdine getHeaderByIdOrder(int idOrdine) {
 		for(IntestazioneOrdine i : this.ordiniRiaggregati.keySet()) {
-			if (i.getIdOrdine()==idOrder)
+			if (i.getIdOrdine()==idOrdine)
 				return i;
 		}
 		return null;
+	}
+	
+	private void sendMessageOrder(IntestazioneOrdine intOrdine, List<RigaOrdine> righe) {
+		List<String> nomiProdotti = new ArrayList<String>();
+		for(RigaOrdine riga : righe) 
+			nomiProdotti.add(riga.getProdotto());
+		Ordine ordine = new Ordine(intOrdine.getIdOrdine(), intOrdine.getCliente(), nomiProdotti);
+		SerializeDeserializeJSON serializeDeserializeJSON = new SerializeDeserializeJSON();
+		String jsonOrdine = serializeDeserializeJSON.serializeObject(ordine);
+		AggregatorProduceMessage aggrProcc = new AggregatorProduceMessage(this.codaOrdiniRiaggregati, this.connectionFactory,jsonOrdine);
+		aggrProcc.run();
 	}
 }
