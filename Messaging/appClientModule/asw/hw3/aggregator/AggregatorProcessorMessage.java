@@ -37,12 +37,24 @@ public class AggregatorProcessorMessage implements MessageListener {
     		TextMessage  messageText = (TextMessage) message;
     		try {
     			String text = messageText.getText();
-    			//processReceiveMessageByQueue(text);
+    			processReceiveMessageByQueue(text);
     		} catch (JMSException e) {
     			logger.info("MessageListener.onMessage(): JMSException: " + e.toString());
     		}
     	}
 		
 	}
+	
+	private void processReceiveMessageByQueue(String mex) {
+		SerializeDeserializeJSON serializeDeserializeJSON = new SerializeDeserializeJSON();
+		IntestazioneOrdine intOrdine = (IntestazioneOrdine) serializeDeserializeJSON.deserializeObject(mex, IntestazioneOrdine.class);
+		if (intOrdine.getIdOrdine()>0 && intOrdine.getCliente()!=null && intOrdine.getNumeroRigheOrdine()>0) 
+			processHeaderOrder(intOrdine);
+	}
+	
+	private void processHeaderOrder(IntestazioneOrdine intOrdine) {
+		
+	}
+	
 
 }
