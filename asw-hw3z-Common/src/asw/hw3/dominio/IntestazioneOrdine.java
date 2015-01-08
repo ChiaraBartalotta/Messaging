@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class IntestazioneOrdine {
 
 	/** Il numero identificativo dell'ordine. 
-	 * Se vale 0 vuol dire che non è stato assegnato. */
+	 * Se vale 0 vuol dire che non ï¿½ stato assegnato. */
 	private int idOrdine; 
 	
 	/** Il (nome del) cliente dell'ordine. */ 
@@ -28,6 +28,26 @@ public class IntestazioneOrdine {
 		this.numeroRigheOrdine = numeroRigheOrdine; 
 	}
 	
+	
+	
+	public void setIdOrdine(int idOrdine) {
+		this.idOrdine = idOrdine;
+	}
+
+
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
+	}
+
+
+
+	public void setNumeroRigheOrdine(int numeroRigheOrdine) {
+		this.numeroRigheOrdine = numeroRigheOrdine;
+	}
+
+
+
 	/** Restituisce una descrizione testuale di questa intestazione d'ordine, nella forma: 
 	 * <id ordine> <cliente> <numero righe> */
 	public String toString() {
