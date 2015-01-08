@@ -5,9 +5,10 @@ import java.util.logging.Logger;
 import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
 
+
 import asw.hw3.dominio.GeneratoreOrdini;
 import asw.hw3.dominio.Ordine;
-
+import asw.hw3.dominio.SerializeDeserializeJSON;
 import asw.jms.simpleproducer.SimpleProducer;
 import asw.util.logging.AswLogger;
 
@@ -55,9 +56,25 @@ public class ProduttoreOrdini {
 				};
 		GeneratoreOrdini g = new GeneratoreOrdini(clienti, prodotti); 
 		for (int i=0; i<100; i++) {
-			Ordine o = g.getRandomOrdine(); 
+			Ordine o = g.getRandomOrdine();
+			String jsonOrder = "";
 			logger.info("Creo ordine (senza id): " + o.toString());
-			p.sendMessage(o.toString()); 
+			SerializeDeserializeJSON serializeDeserializeJSON = new SerializeDeserializeJSON();
+			jsonOrder = serializeDeserializeJSON.serializeObject(o);
+			/*ObjectMapper mapper = new ObjectMapper();
+			try {
+				jsonOrder = mapper.writeValueAsString(o);
+			} catch (JsonGenerationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			p.sendMessage(jsonOrder); 
 		}
 		
 		/* disconnette il produttore */ 
