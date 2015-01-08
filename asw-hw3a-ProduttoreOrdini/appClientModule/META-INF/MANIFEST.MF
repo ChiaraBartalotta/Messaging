@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: asw.hw3.produttoreordini.Main
+Class-Path: asw-hw3z-Common.jar asw-util.jar 
+
