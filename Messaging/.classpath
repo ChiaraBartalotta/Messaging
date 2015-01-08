@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="lib" path="/home/davide/Documenti/files_jar/appserv-rt.jar"/>
+	<classpathentry kind="lib" path="/home/davide/Documenti/files_jar/gf-client.jar"/>
+	<classpathentry kind="lib" path="/home/davide/Documenti/files_jar/javaee.jar"/>
+	<classpathentry kind="lib" path="/home/davide/Documenti/files_jar/jndi-properties.jar"/>
 	<classpathentry kind="src" path="appClientModule"/>
 	<classpathentry kind="src" path="source"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
@@ -10,5 +14,8 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="/home/davide/temp/homework_asw/asw-hw3-messaging-hw/jar/asw-hw3z-Common.jar"/>
 	<classpathentry kind="lib" path="/home/davide/temp/homework_asw/asw-hw3-messaging-hw/jar/asw-util.jar"/>
+	<classpathentry kind="lib" path="/home/davide/Documenti/files_jar/javax.jms.jar"/>
+	<classpathentry kind="lib" path="/home/davide/Documenti/files_jar/java-json.jar"/>
+	<classpathentry kind="lib" path="/home/davide/Documenti/files_jar/jackson-all-1.9.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
