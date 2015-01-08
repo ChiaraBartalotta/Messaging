@@ -10,16 +10,15 @@ import javax.annotation.Resource;
  */
 public class Main {
 
-	/* L'iniezione delle dipendenze può avvenire solo nella main class. */ 
-//	@Resource(lookup = "jms/asw/CodaOrdiniRiaggregati")		/* versione finale */ 
-	@Resource(lookup = "jms/asw/CodaOrdiniSenzaId")    		/* ATTENZIONE: nella versione finale dovrà leggere da "jms/asw/CodaOrdiniRiaggregati" */ 
-    private static Queue codaOrdini;
+	/* L'iniezione delle dipendenze puï¿½ avvenire solo nella main class. */ 
+	@Resource(lookup = "jms/asw/CodaOrdiniRiaggregati")		/* versione finale */ 
+    private static Queue codaOrdiniRiaggregati;
     @Resource(lookup = "jms/asw/ConnectionFactory")
     private static ConnectionFactory connectionFactory;
 
     public static void main(String[] args) {
 
-    	ConsumatoreOrdini client = new ConsumatoreOrdini(codaOrdini, connectionFactory);
+    	ConsumatoreOrdini client = new ConsumatoreOrdini(codaOrdiniRiaggregati, connectionFactory);
     	client.run(); 
         
     }

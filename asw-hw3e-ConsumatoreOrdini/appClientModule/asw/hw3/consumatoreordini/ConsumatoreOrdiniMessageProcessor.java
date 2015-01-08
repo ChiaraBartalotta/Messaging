@@ -6,8 +6,10 @@ import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
 import asw.hw3.dominio.Ordine;
+import asw.hw3.dominio.SerializeDeserializeJSON;
 
 import java.util.logging.Logger;
+
 import asw.util.logging.AswLogger;
 
 /*
@@ -61,8 +63,10 @@ public class ConsumatoreOrdiniMessageProcessor implements MessageListener {
 	private void processMessage(String message) {
 		/* conta il messaggio ricevuto */ 
 		this.messaggiRicevuti++; 
-		/* il messaggio ricevuto è un ordine */ 
-		Ordine o = new Ordine(message);
+		/* il messaggio ricevuto ï¿½ un ordine */
+		SerializeDeserializeJSON deser = new SerializeDeserializeJSON();
+		Ordine o = (Ordine) deser.deserializeObject(message, Ordine.class);
+		//Ordine o = new Ordine(message);
 		/* visualizza l'ordine */ 
 		logger.info("Ricevuto ordine completo: "+ o.toString()); 
 	}

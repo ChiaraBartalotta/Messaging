@@ -17,7 +17,7 @@ import asw.util.logging.AswLogger;
  */
 public class ConsumatoreOrdini {
 	
-    private Queue codaOrdini;
+    private Queue codaOrdiniRiaggregati;
     private ConnectionFactory connectionFactory;
     
 	private SimpleAsynchConsumer c = null; 
@@ -30,7 +30,7 @@ public class ConsumatoreOrdini {
 	 * per la coda codaOrdini. 
 	 */
     public ConsumatoreOrdini(Queue codaOrdini, ConnectionFactory connectionFactory) {
-    	this.codaOrdini = codaOrdini; 
+    	this.codaOrdiniRiaggregati = codaOrdini; 
     	this.connectionFactory = connectionFactory; 
 	}
 	
@@ -42,8 +42,8 @@ public class ConsumatoreOrdini {
 		/* crea il proprio processore/ascoltatore di messaggi */ 
 		MessageListener listener = new ConsumatoreOrdiniMessageProcessor(); 
 		
-		/* crea un consumatore su codaOrdini - girerà messaggi al proprio processore/listener */ 
-    	c = new SimpleAsynchConsumer("Consumatore ordini", codaOrdini, connectionFactory, listener);
+		/* crea un consumatore su codaOrdini - girerï¿½ messaggi al proprio processore/listener */ 
+    	c = new SimpleAsynchConsumer("Consumatore ordini", codaOrdiniRiaggregati, connectionFactory, listener);
         logger.info("Creato consumatore: " + c.toString());
 
         /* per interrompere il consumatore premendo INVIO */ 
